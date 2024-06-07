@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  stoptel-mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: stoptel
+      MONGO_INITDB_ROOT_PASSWORD: "!stoptel-dev!"
+      
+  stoptel-nginx-sync:
+    image: nginx
+    volumes:
+      - ./templates:/etc/nginx/templates
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_HOST=foobar.com
+      - NGINX_PORT=80
+      
